@@ -14,8 +14,8 @@ body {
 }
 
 .main-click-dice-button {
-    width:150px;
-    height:150px;
+    width:200px;
+    height:200px;
     background-image: url("/static/images/Dice_Image_KC_Clicker.png");
     background-size: cover;
     border:black solid 2px;
@@ -26,6 +26,15 @@ body {
     font-size: 18px;
     margin-top: 20px;
     color: black;
+}
+
+.thirty-ninth-street-button-class {
+    width:150px;
+    height:195px;
+    background-image: url("/static/images/39TH_Street.png");
+    background-size: cover;
+    border:none;
+    cursor: pointer;
 }
 
 .footer-class {
