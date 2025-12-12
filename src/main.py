@@ -12,6 +12,8 @@ def main():
 @app.route('/get_dice_click_from_js', methods=['POST'])
 def get_dice_click_from_js():
     data = request.get_json()
+    with open("tests/test.txt", "a") as f:
+        f.write(f"{data}\n")
     print(f"Received dice click data: {data}")  
     return jsonify({"status": "success", "message": "Dice click received successfully."})
 
