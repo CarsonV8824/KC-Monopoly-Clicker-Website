@@ -1,4 +1,4 @@
-# Welcome to KC Monolopy Clicker
+# Welcome to KC Clicker
 
-this game is inspired by Monolopy
+A Kansas City Version of Cookie Clicker where you buy locations from Kansas City
 
