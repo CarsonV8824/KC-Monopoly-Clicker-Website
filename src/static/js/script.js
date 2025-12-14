@@ -36,7 +36,7 @@ async function updateMoneyPerSec() {
   fetch('/get_money_per_sec_info_from_py', {cache: "no-cache"})
     .then(res => res.json())
     .then(data => {
-      moneyPerSecSpan.textContent = `Money Per Second: $${data.money_per_sec}`;
+      moneyPerSecSpan.textContent = `Money Per Second: $${data.money_per_sec.toLocaleString()}`;
     })
     .catch(err => console.error('Error fetching money per second:', err));
 }
@@ -49,7 +49,7 @@ async function updateMoneyGeneration() {
   fetch('/get_money_generation_from_py', {cache: "no-cache"})
     .then(res => res.json())
     .then(data => {
-      moneyGenerationSpan.textContent = `Money: $${data.money}`;
+      moneyGenerationSpan.textContent = `Money: $${data.money.toLocaleString()}`;
     })
     .catch(err => console.error('Error fetching money generation:', err));
 }
@@ -125,14 +125,19 @@ setInterval(() => {
   Promise.all([
     updateDiceCount(),
     updateMoneyPerSec(),
-    updateMoneyGeneration(),
+    //updateMoneyGeneration(),
     updateThirtyNinthStreetInfo(),
     updateThePaseoInfo()
   ])
   .catch((error) => {
     console.error('Error updating all data:', error);
   });
-}, 400);
+}, 1000);
+
+//dice count at faster interval to make it feel more responsive
+
+setInterval(updateMoneyGeneration, 250);
+updateMoneyGeneration()
 
 //Saving Data on Window Close
 
