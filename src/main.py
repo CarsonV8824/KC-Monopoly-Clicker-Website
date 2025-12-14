@@ -14,7 +14,7 @@ def load_data_store() -> tuple:
     return data
 
 def save_data_store(username: str="test", email: str="test@example.com", stats: dict={}) -> None:
-    db = Database()
+    db:Database = Database()
     db.add_data(username, email, stats)
     db.close()
 
