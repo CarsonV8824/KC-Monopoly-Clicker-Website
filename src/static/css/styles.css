@@ -47,7 +47,7 @@ body {
     text-align:top left;
     background-color: rgb(200, 200, 200);
     margin: 20px;
-    height:800px;
+    height:1200px;
 }
 
 .thirty-ninth-street-button-class {
@@ -68,9 +68,28 @@ body {
     cursor: pointer;
 }
 
+.wornall-road-button-class {
+    width:150px;
+    height:195px;
+    background-image: url("/static/images/Wornall_Road.png");
+    background-size: cover;
+    border:none;
+    cursor: pointer;
+}
+
+.roanoke-road-button-class{
+    width:150px;
+    height:195px;
+    background-image: url("/static/images/Roanoke_Road.png");
+    background-size: cover;
+    border:none;
+    cursor: pointer;
+}
+
 .button-label-class {
-  display: inline-block;
-  margin-left: 12px;
+  display: block;
+  margin-top: 12px;
+  margin-left: 0;
   font-size: 16px;
   color: black;
 }

@@ -6,7 +6,9 @@ class Game_State:
             "money_per_sec": 0,
             "producers": {
                 "39th_street": {"owned": 0, "$PerSec": 1, "cost": 100},
-                "The_Paseo": {"owned": 0, "$PerSec": 5, "cost": 500}
+                "The_Paseo": {"owned": 0, "$PerSec": 5, "cost": 500},
+                "Wornall_Road": {"owned":0, "$PerSec": 10, "cost":2000},
+                "Roanoke_Road": {"owned":0, "$PerSec": 50, "cost":10000}
             }
         }
 

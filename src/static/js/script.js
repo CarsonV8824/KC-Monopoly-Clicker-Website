@@ -118,6 +118,70 @@ async function updateThePaseoInfo() {
     .catch(err => console.error('Error fetching The Paseo info:', err));
 }
 
+//getting wornall road to python
+
+const wornallRoadButton = document.getElementById('wornall_road_button');
+
+wornallRoadButton.addEventListener('click', () => {
+    fetch('/get_Wornall_Road_button_click_from_js', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "buy": true })
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
+//getting Wornall Road info from python
+
+const wornallRoadInfoSpan = document.getElementById('wornall_road_info_span');
+
+async function updateWornallRoadInfo() {
+    fetch('/get_Wornall_Road_button_click_from_py', {cache: "no-cache"})
+        .then(res => res.json())
+        .then(data => {
+            wornallRoadInfoSpan.textContent = `Owned: ${data.owned} | Cost: $${data.cost}`;
+        }
+    )
+    .catch(err => console.error('Error fetching Wornall Road info:', err));
+}
+
+// getting Roanoke Road to python
+
+const roanokeRoadButton = document.getElementById('roanoke_road_button');
+
+roanokeRoadButton.addEventListener('click', () => {
+    fetch('/get_Roanoke_Road_button_click_from_js', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "buy": true })
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
+//getting Roanoke Road info from python
+
+const roanokeRoadInfoSpan = document.getElementById('roanoke_road_info_span');
+
+async function updateRoanokeRoadInfo() {
+    fetch('/get_Roanoke_Road_button_click_from_py', {cache: "no-cache"})
+        .then(res => res.json())
+        .then(data => {
+            roanokeRoadInfoSpan.textContent = `Owned: ${data.owned} | Cost: $${data.cost}`;
+        }
+    )
+    .catch(err => console.error('Error fetching Roanoke Road info:', err));
+}
+
 // send data back at one time
 // use mod operater if you need different intervals for each
 
@@ -127,7 +191,9 @@ setInterval(() => {
     updateMoneyPerSec(),
     //updateMoneyGeneration(),
     updateThirtyNinthStreetInfo(),
-    updateThePaseoInfo()
+    updateThePaseoInfo(),
+    updateWornallRoadInfo(),
+    updateRoanokeRoadInfo()
   ])
   .catch((error) => {
     console.error('Error updating all data:', error);

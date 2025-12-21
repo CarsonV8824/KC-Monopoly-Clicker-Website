@@ -52,6 +52,15 @@ def main():
     the_paseo_button = the_paseo_producer["cost"]
     the_paseo_button = f"The Paseo owned: {the_paseo_owned} | Cost: ${the_paseo_button}"
 
+    wornall_road_producer = game_state.game_state["producers"]["Wornall_Road"]
+    wornall_road_owned = wornall_road_producer.get("owned", 0)
+    wornall_road_button = wornall_road_producer["cost"]
+    wornall_road_button = f"Wornall Road owned: {wornall_road_owned} | Cost: ${wornall_road_button}"
+
+    roanoke_road_producer = game_state.game_state["producers"]["Roanoke_Road"]
+    roanoke_road_owned = roanoke_road_producer.get("owned", 0)
+    roanoke_road_button = roanoke_road_producer["cost"]
+    roanoke_road_button = f"Roanoke Road owned: {roanoke_road_owned} | Cost: ${roanoke_road_button}"
 
     money = game_state.game_state["money"]
     money_per_sec = game_state.game_state["money_per_sec"]
@@ -64,7 +73,10 @@ def main():
         money=money,
         money_per_sec=money_per_sec,
         thirty_nine_street_button=thirty_nine_street_button,
-        the_paseo_button=the_paseo_button
+        the_paseo_button=the_paseo_button,
+        wornall_road_button=wornall_road_button,
+        roanoke_road_button=roanoke_road_button
+
     )
 
 #---Dice Click Info---#
@@ -125,6 +137,54 @@ def get_The_Paseo_button_click_from_js():
 @app.route("/get_The_Paseo_button_click_from_py")
 def get_the_paseo_button_click_from_py():
     producer = game_state.game_state["producers"]["The_Paseo"]
+    return jsonify({
+        "owned": producer.get("owned", 0),
+        "cost": producer["cost"]
+    })
+
+#---Wornall Road Button Click Info---#
+
+@app.route('/get_Wornall_Road_button_click_from_js', methods=['POST'])
+def get_Wornall_Road_button_click_from_js():
+    data = request.get_json(silent=True) or {}
+    producer = game_state.game_state["producers"]["Wornall_Road"]
+    cost = producer["cost"]
+
+    if data.get("buy") and game_state.game_state["money"] >= cost:
+        game_state.game_state["money"] -= cost
+        producer["owned"] = producer.get("owned", 0) + 1
+        game_state.game_state["money_per_sec"] += producer["$PerSec"]
+        producer["cost"] = int(round(cost * 1.15))
+
+    return jsonify({"status": "success", "message": "Wornall Road button click received successfully."})
+
+@app.route("/get_Wornall_Road_button_click_from_py")
+def get_wornall_road_button_click_from_py():
+    producer = game_state.game_state["producers"]["Wornall_Road"]
+    return jsonify({
+        "owned": producer.get("owned", 0),
+        "cost": producer["cost"]
+    })
+
+#---Roanoke Road Button Click Info---#
+
+@app.route('/get_Roanoke_Road_button_click_from_js', methods=['POST'])
+def get_Roanoke_Road_button_click_from_js():
+    data = request.get_json(silent=True) or {}
+    producer = game_state.game_state["producers"]["Roanoke_Road"]
+    cost = producer["cost"]
+
+    if data.get("buy") and game_state.game_state["money"] >= cost:
+        game_state.game_state["money"] -= cost
+        producer["owned"] = producer.get("owned", 0) + 1
+        game_state.game_state["money_per_sec"] += producer["$PerSec"]
+        producer["cost"] = int(round(cost * 1.15))
+
+    return jsonify({"status": "success", "message": "Roanoke Road button click received successfully."})
+
+@app.route("/get_Roanoke_Road_button_click_from_py")
+def get_roanoke_road_button_click_from_py():
+    producer = game_state.game_state["producers"]["Roanoke_Road"]
     return jsonify({
         "owned": producer.get("owned", 0),
         "cost": producer["cost"]
